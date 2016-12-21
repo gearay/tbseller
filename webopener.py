@@ -15,12 +15,14 @@ import urllib.parse
 # with request.urlopen('file:///Users/garychen/Documents/python%20demo/jiangmeijia2008.html') as webfile:
 #     html = webfile.read()
 #     htmlcontent =html.decode('GBK')
-    # html = htmlcontent.encode('utf-8')
+# html = htmlcontent.encode('utf-8')
 
-    # print('Status:', webfile.status, webfile.reason)
-    # for k, v in webfile.getheaders():
-    #     print('%s: %s' % (k, v))
-    # print('Data:', html.decode('utf-8'))
+# print('Status:', webfile.status, webfile.reason)
+# for k, v in webfile.getheaders():
+#     print('%s: %s' % (k, v))
+# print('Data:', html.decode('utf-8'))
+
+
 def getHtml(url, daili='', postdata={}):
     """
 抓取网页：支持cookie
@@ -39,7 +41,7 @@ def getHtml(url, daili='', postdata={}):
     # 如果存在，则读取主要COOKIE
     if os.path.exists(filename):
 
-        cj.load(filename, ignore_discard=True, ignore_expires=True)        
+        cj.load(filename, ignore_discard=True, ignore_expires=True)
     # 读取其他COOKIE
     if os.path.exists('subcookie.txt'):
         cookie = open('subcookie.txt', 'r').read()
@@ -57,14 +59,14 @@ def getHtml(url, daili='', postdata={}):
 
     # 打开专家加头部
     opener.addheaders = [('User-Agent',
-                          'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.98 Safari/537.36'),                         
-                         ('Cookie', cookie),                         
-                         ('method','GET'),
-                         ('scheme','https'),
-                         ('accept','text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'),
-													]
+                          'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.98 Safari/537.36'),
+                         ('Cookie', cookie),
+                         ('method', 'GET'),
+                         ('scheme', 'https'),
+                         ('accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'),
+                         ]
 
-    # 分配专家  
+    # 分配专家
     urllib.request.install_opener(opener)
     # 有数据需要POST
     if postdata:
