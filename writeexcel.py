@@ -28,12 +28,7 @@ def writeexcel(path, dealcontent):
         for j in range(0, len(dealcontent[i])):
             if i != 0 and j == len(dealcontent[i]) - 1:
                 if dealcontent[i][j] == '':
-                    worksheet.write(i, j, ' ', formatt)
-                else:
-                    try:
-                        worksheet.insert_image(i, j, dealcontent[i][j])
-                    except:
-                        worksheet.write(i, j, ' ', formatt)
+                    worksheet.write(i, j, ' ', formatt)                
             else:
                 if dealcontent[i][j]:
                     worksheet.write(i, j, dealcontent[i][

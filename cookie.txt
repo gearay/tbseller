@@ -2,6 +2,6 @@
 # http://curl.haxx.se/rfc/cookie_spec.html
 # This is a generated file!  Do not edit.
 
-.taobao.com	TRUE	/	FALSE		uc1	cookie14=UoW%2FX9mvF079oA%3D%3D&lng=zh_CN&cookie16=U%2BGCWk%2F74Mx5tgzv3dWpnhjPaQ%3D%3D&existShop=false&cookie21=VFC%2FuZ9ainBZ&tag=4&cookie15=VT5L2FSpMGV7TQ%3D%3D&pas=0
+.taobao.com	TRUE	/	FALSE		uc1	cookie14=UoW%2FX9mvFq0xcQ%3D%3D&lng=zh_CN&cookie16=U%2BGCWk%2F74Mx5tgzv3dWpnhjPaQ%3D%3D&existShop=false&cookie21=URm48syIYn73&tag=4&cookie15=U%2BGCWk%2F75gdr5Q%3D%3D&pas=0
 s.taobao.com	FALSE	/	FALSE		JSESSIONID	34F15EA03C4DD9E0A048D3CC2E90EE7A
 shopsearch.taobao.com	FALSE	/	FALSE		JSESSIONID	AEB8C9359874DF60F4100903E075A923
