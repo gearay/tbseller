@@ -9,6 +9,8 @@ from webopener import getHtml
 import time
 import random
 import re
+from writeexcel import writeexcel
+
 
 
 class Shop(object):
@@ -66,6 +68,8 @@ if __name__ == "__main__":
     # with open('creditpage.html') as html:
     # 	soup = Pagesoup(html)
     # 	print(soup.mcreditbad())
+    total = []
+    total.append(['店名','卖家','主营','卖家信用','1月好评','1月中评','1月差评'])
     with open('shoplist.txt') as list:
         try:
             for line in list.readlines():
@@ -81,8 +85,13 @@ if __name__ == "__main__":
                 tbshop.mnice = soup.mcreditok()
                 tbshop.mmiddle = soup.mcreditnormal()
                 tbshop.mbad = soup.mcreditbad()
-                print('%s: %s %s %s %s %s' % (tbshop.sellern, tbshop.main,
-                                              tbshop.credit, tbshop.mnice, tbshop.mmiddle, tbshop.mbad))
+                tbshoplist= [sname,tbshop.sellern,tbshop.main,tbshop.credit,tbshop.mnice,tbshop.mmiddle,tbshop.mbad]
+                total.append(tbshoplist)
+
 
         except IndexError as e:
-            raise e
+            print('抓了%d个' %(len(total)-1))
+    if len(total) > 1:
+        writeexcel('北美代购商家列表.xlsx', total)
+    else:
+        print('什么都抓不到')
