@@ -1,0 +1,4 @@
+opener.addheaders = [('User-Agent',
+                          'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.98 Safari/537.36'),                         
+                         ('Cookie', cookie),('authority','rate.taobao.com'),('method','GET'),('path','/user-rate-UvGNYvGgLOmku.htm?spm=a230r.7195193.1997079397.3.ZsZZtG&smToken=b6e9342fb58f481bb81ec4b0bda47cf9&smSign=kXc2qZFWRev%2BuYw2uHC5mw%3D%3D'),('scheme','https'),('accept','text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'),
+													]

@@ -5,49 +5,47 @@
 # @Link    : ${link}
 # @Version : $Id$
 
+import urllib.request
+import urllib.parse
+import json
+from webopener import getHtml
 from bs4 import BeautifulSoup
-
-import urllib.request
-import urllib.parse
 import re
-import urllib.request
-import urllib.parse
-import http.cookiejar
 
 
-def getHtml(url):
-	cj = http.cookiejar.CookieJar()
-	opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(cj))
-	opener.addheaders = [('User-Agent',
-	                      'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.101 Safari/537.36'),
-	                     ('Cookie', '4564564564564564565646540')]
+if __name__ == "__main__":
+    # keyword = input("请输入关键字")
+    with open('shoplist.txt', 'w') as shoplist:
+		    for pagecount in range(0, 2000, 20):
+		        postdata = {
+		            'q': '北美代购',
+		            'js': '1',
+		            'ie': 'utf8',
+		            'sort': 'credit-desc',
+		            's': pagecount
+		        }
+		        postdata = urllib.parse.urlencode(postdata)
+		        tburl = "https://shopsearch.taobao.com/search?app=shopsearch&" + postdata
 
-	urllib.request.install_opener(opener)
+		        try:
+		            content1 = getHtml(tburl)
+		            content1 = content1.decode('utf-8', 'ignore')
+		            content1 = re.findall(
+		                r'g_page_config = (.*?);\n', content1, re.S)
+		            shop = json.loads(content1[0])
+		            shopfiles = shop['mods']['shoplist']['data']['shopItems']
+		            for shopfile in shopfiles:
+		                shopinfo = shopfile['title'] + ',' + 'https://' + \
+		                    re.sub(r'//(.*?)', '', shopfile['userRateUrl'])+'\n'
+		                shoplist.write(shopinfo)
 
-	html_bytes = urllib.request.urlopen(url).read()
-	html_string = html_bytes.decode('utf-8')
-	return html_string
+		        except Exception as e:
+		            if hasattr(e, 'code'):
+		                print('页面不存在或时间太长.')
+		                print('Error code:', e.code)
+		            elif hasattr(e, 'reason'):
+		                print("无法到达主机.")
+		                print('Reason:  ', e.reason)
+		            else:
+		                print(e)
 
-html_doc = getHtml("http://zst.aicai.com/ssq/openInfo/")
-soup = BeautifulSoup(html_doc, 'html.parser')
-
-# print(soup.title)
-#table = soup.find_all('table', class_='fzTab')
-# print(table)#<tr onmouseout="this.style.background=''" 这种tr丢失了
-# soup.strip() 加了strip后经常出现find_all('tr') 只返回第一个tr
-tr = soup.find('tr', attrs={"onmouseout": "this.style.background=''"})
-# print(tr)
-tds = tr.find_all('td')
-opennum = tds[0].get_text()
-
-# print(opennum)
-reds = []
-for i in range(2, 8):
-	reds.append(tds[i].get_text())
-# print(reds)
-	blue = tds[8].get_text()
-# print(blue)
-# 把list转换为字符串:(',').join(list)
-# 最终输出结果格式如：2015075期开奖号码：6,11,13,19,21,32, 蓝球：4 44 
-# print(opennum+'期开奖号码：'+ (',').join(reds)+", 蓝球："+blue)
-print ('第 %s 期抽奖结果为： 红球 %s, 篮球 %s' %(opennum, (',').join(reds), str(blue)))

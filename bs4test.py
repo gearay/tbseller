@@ -69,7 +69,7 @@ if __name__ == "__main__":
     with open('shoplist.txt') as list:
         try:
             for line in list.readlines():
-                time.sleep(random.randint(5, 7))
+                time.sleep(random.uniform(5, 7))
                 sname, surl = (line.split(","))
                 html = getHtml(surl)
                 tbshop = Shop(sname)
